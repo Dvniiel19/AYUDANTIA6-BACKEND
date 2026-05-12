@@ -52,6 +52,10 @@ const updateUsuarioSchema = Joi.object({
   // Ayudita: Usa las mismas validaciones de arriba pero con required() removido
   // Ejemplo: 
   // nombre: Joi.string().alphanum().min(3).max(30).optional()
+  nombre: Joi.string().alphanum().min(3).max(30).optional(),
+  apellido: Joi.string().alphanum().min(3).max(30).optional(),
+  email: Joi.string().email().optional(),
+  edad: Joi.number().integer().min(18).max(120).optional()
 }).min(1); // Al menos debe enviarse un campo
 
 module.exports = {

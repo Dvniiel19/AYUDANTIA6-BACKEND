@@ -24,8 +24,10 @@ const crearUsuario = async (datosUsuario) => {
  */
 const obtenerTodosLosUsuarios = async () => {
   // TODO: Implementar la obtención de todos los usuarios
-  // Ayudita: Usa usuarioRepository.find()
-  return [];
+  // usuarioRepository.find()  // Llamada sin return, no devuelve nada
+  // return [];  // Siempre devuelve array vacío
+  // Propuesta: return await usuarioRepository.find();  // Devuelve todos los usuarios
+  return await usuarioRepository.find();
 };
 
 /**
@@ -35,8 +37,10 @@ const obtenerTodosLosUsuarios = async () => {
  */
 const obtenerUsuarioPorId = async (id) => {
   // TODO: Implementar la obtención de un usuario por ID
-  // Ayudita: Usa usuarioRepository.findOneBy({ id })
-  return null;
+  // usuarioRepository.findOneBy({ id })  // Llamada sin return, no devuelve nada
+  // return null;  // Siempre devuelve null
+  // Propuesta: return await usuarioRepository.findOneBy({ id });  // Devuelve el usuario o null
+  return await usuarioRepository.findOneBy({ id });
 };
 
 /**
@@ -47,9 +51,12 @@ const obtenerUsuarioPorId = async (id) => {
  */
 const actualizarUsuario = async (id, datosActualizados) => {
   // TODO: Implementar la actualización de un usuario
-  // Ayudita: Primero usa usuarioRepository.update(id, datosActualizados)
-  // Y luego retorna el usuario actualizado usando obtenerUsuarioPorId(id)
-  return null;
+  // user = usuarioRepository.update(id, datosActualizados)  // Variable no declarada, sin await
+  // return obtenerUsuarioPorId(id)  // Sin await, return null después
+  // return null;  // Código unreachable
+  // Propuesta: await usuarioRepository.update(id, datosActualizados); return await obtenerUsuarioPorId(id);
+  await usuarioRepository.update(id, datosActualizados);
+  return await obtenerUsuarioPorId(id);
 };
 
 /**
@@ -58,10 +65,15 @@ const actualizarUsuario = async (id, datosActualizados) => {
  * @returns {boolean} true si se eliminó, false si no existe
  */
 const eliminarUsuario = async (id) => {
-  // TODO: Implementar la eliminación de un usuario
-  // Ayudita: Usa usuarioRepository.delete(id) y verifica result.affected
-  return false;
-};
+  // const result = await usuarioRepository.delete(id)  // Bien, pero luego...
+  // if(result.affected === -1){  // -1 no es correcto, affected es >0 si se eliminó
+  // return false;  // Solo en ese caso, sino undefined
+  // }
+  // Propuesta: const result = await usuarioRepository.delete(id); return result.affected > 0;
+  const result = await usuarioRepository.delete(id);
+  return result.affected > 0; return false;
+}
+
 
 module.exports = {
   crearUsuario,
