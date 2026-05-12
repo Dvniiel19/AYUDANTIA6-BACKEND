@@ -7,7 +7,7 @@ const AppDataSource = new DataSource({
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432'),
   username: process.env.DB_USERNAME || 'daniel',
-  //password: process.env.DB_PASSWORD || 'password',
+  //password: process.env.DB_PASSWORD || 'password', no tengo contraseña 
   database: process.env.DATABASE || 'metodologia_db',
   synchronize: true, // Auto-crear tablas (solo para desarrollo)
   logging: false,
