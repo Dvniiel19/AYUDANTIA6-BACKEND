@@ -26,7 +26,7 @@ const obtenerTodosLosUsuarios = async () => {
   // TODO: Implementar la obtención de todos los usuarios
   // Ayudita: Usa usuarioRepository.find()
   return await usuarioRepository.find();
-  //return [];
+  //return []; //da error porque espera un array, pero luego lo reemplazaremos con la consulta real a la base de datos
   return null;
 };
 
@@ -55,6 +55,7 @@ const actualizarUsuario = async (id, datosActualizados) => {
   await usuarioRepository.update(id, datosActualizados);
   // Y luego retorna el usuario actualizado usando obtenerUsuarioPorId(id)
   return await obtenerUsuarioPorId(id);
+  return null; // si no existe 
 };
 
 /**
